@@ -2,7 +2,7 @@ const express = require('express');
 const UserRouter = express.Router();
 const userModel = require('../models/users');
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 
 //CRUD
