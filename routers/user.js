@@ -272,6 +272,27 @@ UserRouter.put('/changeinfo', (req, res) =>{
     })
 })
 
+//checkupload
+UserRouter.post('/checkdisabled',(req, res)=>{
+    idUser = req.body.idUser;
+    userModel.findById(idUser)
+        .then(dataUser =>{
+            if(dataUser.disabled === false){
+                res.send({
+                    success: true,
+                    message: "Tài khoản người dùng vẫn hoạt động!"
+                })
+            } else {
+                res.send({
+                    success: false,
+                    message: "Tài khoản người dùng đã bị khóa!"
+                })
+            }
+        }).catch(err =>{
+            console.log(err)
+        })
+})
+
 //delete
 
 
