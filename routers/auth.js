@@ -9,12 +9,7 @@ const jwtSecret = "qweqweqweqwe"
 //Authentication
 //login
 AuthRouter.post('/login', (req, res) =>{
-    //TODO:
-    // - Get username, pasword from request
     const {username, password} = req.body;
-    // - Check if user with username exist
-    // - Compare password
-    // -
     if (!username || !password){
         res.json({
             success: 0 ,
@@ -37,12 +32,6 @@ AuthRouter.post('/login', (req, res) =>{
                 }
                 else{
                     if(bcrypt.compareSync(password,userFound.password)){
-                        // login with session
-                        // req.session.user = {
-                        //     username,
-                        //     id: userFound._id,
-                        // };
-    
                         //login with jwt
                         const access_token = jwt.sign({ username, id: userFound._id }, jwtSecret);
     
@@ -62,31 +51,6 @@ AuthRouter.post('/login', (req, res) =>{
                         })
                     }
                 }
-                // if(bcrypt.compareSync(password,userFound.password)){
-                //     // login with session
-                //     // req.session.user = {
-                //     //     username,
-                //     //     id: userFound._id,
-                //     // };
-
-                //     //login with jwt
-                //     const access_token = jwt.sign({ username, id: userFound._id }, jwtSecret);
-
-                //     res.json({
-                //         success: 1,
-                //         message: 'Đăng nhập thành công!',
-                //         access_token,
-                //         user:{
-                //             username,
-                //             id: userFound._id
-                //         }
-                //     })
-                // } else{
-                //     res.json({
-                //         success: 0,
-                //         message: 'Sai mật khẩu!'
-                //     })
-                // }
             }
     }).catch(err => {
         res.json({
@@ -96,19 +60,8 @@ AuthRouter.post('/login', (req, res) =>{
     })
 })
 
-//logout with session
-// AuthRouter.delete('/logout', (req, res) =>{
-//     req.session.user = null;
-//     req.session.destroy();
-//     res.json({
-//         success: 1,
-//         message: 'Đăng xuất thành công!'
-//     });
-// });
-
 AuthRouter.get('/check', (req, res) =>{
     const access_token = req.query.access_token;
-    // const access_token = req.headers.authorization.split(' ')[1];
     const decode = jwt.verify(access_token, jwtSecret);
     console.log(decode);
     try{
@@ -128,11 +81,6 @@ AuthRouter.get('/check', (req, res) =>{
                         });
                     }
             })
-            // res.send({
-            //     success: 1,
-            //     message: 'Người dùng đã đăng nhập',
-            //     user: decode
-            // });
         } else{
             res.send({
                 success: 0,
@@ -146,18 +94,5 @@ AuthRouter.get('/check', (req, res) =>{
             message: 'Token không đúng'
         });
     }
-    
-    // if(req.session.user){
-        // res.send({
-        //     success: 1,
-        //     message: 'Nguoi dung da dang nhap',
-        //     user: req.session.user
-        // });
-    // } else {
-        // res.send({
-        //     success: 0,
-        //     message: 'Nguoi dung chua dang nhap'
-        // })
-    // }
 })
 module.exports = AuthRouter;

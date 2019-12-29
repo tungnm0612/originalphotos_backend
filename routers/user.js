@@ -44,24 +44,6 @@ UserRouter.post('/adduser', (req , res) =>{
             })
         }
     })
-    
-    // const hashPassword = bcrypt.hashSync(password, 12);
-    // userModel.create({username, email, password: hashPassword, fullname, disabled: false})
-    //     .then(userCreated =>{
-    //         // console.log(userCreated);
-    //         res.status(201).json({
-    //             success: true,
-    //             message: "Tạo tài khoản thành công!",
-    //             data: userCreated,
-    //         })
-    //     }).catch(error =>{
-    //         console.log(error);
-    //         res.status(500).json({
-    //             success: false,
-    //             message: "Tạo tài khoản không thành công!",
-    //             error,
-    //         })
-    // })
 });
 
 //Get Info Personal

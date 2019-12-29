@@ -2,7 +2,13 @@
     - username
     - password
     - email
+    - fullname
+    - phone
+    - createdAt
+    - updatedAt
 - image:
+    - transactionHash
     - userId
     - hashImage
-    - date
+    - createdAt
+    - updatedAt
