@@ -50,7 +50,7 @@ ImageRouter.post('/uploadimage', imageUploader.single('uploadimage'), (req, res)
                             await imageContract.methods.addImage(idUser, hashImage).send({from:accounts[0], gas: "1000000"}, function(error, transactionHash){
                                 if (error) throw error
                                 console.log("Mã giao dịch là: " + transactionHash);
-                                imageModel.create({idUser, hashImage, transactionHash})
+                                imageModel.create({idUser, nameImage: orgName, hashImage, transactionHash})
                                     .then(imageCreated =>{
                                         console.log("Đã lưu giao dịch vào DB")
                                         res.status(201).json({
